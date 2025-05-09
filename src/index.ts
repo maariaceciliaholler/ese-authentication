@@ -1,8 +1,10 @@
-import http from "./routes/http-server";
-import db from "./config/db-server";
+import SequelizeAdapter from "./config/sequelize"; 
+import server from "./adapter/express";
 
-async function start() {
-    db.connectDataBase();
-    http.runHttpServer();
+async function startApp() {
+  await SequelizeAdapter.connectDataBase(); 
+
+  server.runHttpServer();
 }
-start();
+
+startApp();

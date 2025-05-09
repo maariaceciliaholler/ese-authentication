@@ -3,6 +3,6 @@ import { handleRegisterAdmin } from "../../controllers/user/auth/register.contro
 
 const registerRoutes = Router();
 
-registerRoutes.post("/admin/register", handleRegisterAdmin);
+registerRoutes.post("/", handleRegisterAdmin);
 
 export default registerRoutes;

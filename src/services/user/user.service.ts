@@ -1,5 +1,6 @@
 import UserRepository from "../../repositories/user/user.repository";
 import LoginRepository from "../../repositories/user/auth/login.repository";
+import { generateToken } from "../../config/jwt";
 
 class UserService {
     async register({ name, cpf, email, password }: {
@@ -18,6 +19,9 @@ class UserService {
 
     async login({ email, password }: { email: string; password: string }) {
         const userId = await LoginRepository.authenticateUser(email, password);
-        return { token: `fake-jwt-for-user-${userId}` }; 
+
+        const token = generateToken({ id: userId, email });
+
+        return { token };
     }
 }
