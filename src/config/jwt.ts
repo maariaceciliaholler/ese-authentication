@@ -8,6 +8,7 @@ export function generateToken(payload: object): string {
     const options: SignOptions = {
         expiresIn: jwtExpiration,
     };
+    console.log("JWT_SECRET usado para gerar o token:", jwtSecret);
     return jwt.sign(payload, jwtSecret, options);
 }
 

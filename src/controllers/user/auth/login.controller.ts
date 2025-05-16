@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import LoginRepository from "../../../repositories/user/auth/login.repository";
+import { generateToken } from "../../../config/jwt";
 
 async function handleFindAdmin(req: Request, res: Response) {
     try {
@@ -11,7 +12,9 @@ async function handleFindAdmin(req: Request, res: Response) {
 
         const userId = await LoginRepository.authenticateUser(userEmail, userPassword);
 
-        res.status(200).send({ userId });
+        const token = generateToken({ id: userId, email: userEmail });
+
+        res.status(200).send({ token }); 
     } catch (ex) {
         console.error("Erro interno:", ex);
         res.status(500).send({ error: "Erro interno no servidor." });
